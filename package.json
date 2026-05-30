@@ -1,0 +1,51 @@
+{
+  "name": "@quantaseal/mcp-server",
+  "version": "1.0.0",
+  "description": "QuantaSeal MCP Server - quantum-safe vault, encryption, and compliance tools for AI agents",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "quantaseal",
+    "quantum-safe",
+    "post-quantum",
+    "ML-KEM-768",
+    "vault",
+    "encryption"
+  ],
+  "homepage": "https://quantaseal.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantaseal/quantaseal.git",
+    "directory": "sdk/mcp"
+  },
+  "license": "MIT",
+  "author": "QuantaSeal <sdk@quantaseal.io>",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "quantaseal-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "start:sse": "node dist/server.js --transport sse",
+    "dev": "node --watch --experimental-specifier-resolution=node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
