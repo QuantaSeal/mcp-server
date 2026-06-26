@@ -1,0 +1,66 @@
+# Smithery MCP Registry — https://smithery.ai
+# Defines how Smithery discovers, configures, and launches this MCP server.
+
+name: QuantaSeal
+version: 1.1.0
+description: >
+  Post-quantum-safe vault, encryption, compliance, and audit tools for AI agents.
+  21 tools protected by ML-KEM-768 + ML-DSA-65 + AES-256-GCM (NIST FIPS 203/204).
+  Seal secrets, encrypt fields, sign data, and check SOC 2 / HIPAA / GDPR compliance
+  — all from any MCP-compatible AI agent. Per-session tenant isolation.
+
+homepage: https://quantaseal.io/mcp
+iconUrl: https://quantaseal.io/logo-icon.svg
+repository: https://github.com/quantaseal/quantaseal/tree/master/sdk/mcp
+license: MIT
+author:
+  name: QuantaSeal
+  email: sdk@quantaseal.io
+
+categories:
+  - security
+  - cryptography
+  - compliance
+  - vault
+
+tags:
+  - post-quantum
+  - pqc
+  - ml-kem-768
+  - ml-dsa-65
+  - vault
+  - encryption
+  - compliance
+  - audit
+  - soc2
+  - hipaa
+  - gdpr
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - apiKey
+    properties:
+      apiKey:
+        type: string
+        title: QuantaSeal API Key
+        description: >
+          Your QuantaSeal API key (starts with qs_live_).
+          Obtain at https://app.quantaseal.io/settings/api-keys
+        format: password
+      baseUrl:
+        type: string
+        title: API Base URL
+        description: Override the default API URL (leave blank to use https://api.quantaseal.io)
+        default: https://api.quantaseal.io
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@quantaseal/mcp-server@latest"],
+      env: {
+        QUANTASEAL_API_KEY: config.apiKey,
+        ...(config.baseUrl ? { QUANTASEAL_BASE_URL: config.baseUrl } : {}),
+      },
+    })

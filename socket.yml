@@ -1,0 +1,11 @@
+version: 2
+
+# QuantaSeal MCP Server — Socket.dev supply chain security policy
+# Network access is intentional: this package makes HTTPS requests to
+# api.quantaseal.io (or a user-configured QUANTASEAL_BASE_URL) on behalf
+# of authenticated MCP tool calls. No telemetry, no phone-home.
+# Source: https://github.com/quantaseal/quantaseal/tree/master/sdk/mcp
+
+issues:
+  networkAccess:
+    action: warn
